@@ -55,7 +55,7 @@ export default tseslint.config(
             "@stylistic/padded-blocks": ["warn", "never"],
             "@stylistic/brace-style": "warn",
             "@stylistic/comma-spacing": "warn",
-            "@stylistic/indent": ["warn", 2],
+            // "@stylistic/indent": ["warn", 4],
             "@stylistic/quotes": ["warn"],
             "@stylistic/lines-between-class-members": "warn",
             "@stylistic/semi": "error",

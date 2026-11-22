@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,26 @@
             margin: 0;
             padding: 0;
         }
-        body {
+
+        #board {
             background-color: black;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
+
 <body>
-    <h1>Space Invaders</h1>
-    <canvas id="board"></canvas>
+    <div class="container">
+        <h1>Space Invaders</h1>
+    </div>
+    <div class="container">
+        <canvas id="board"></canvas>
+    </div>
     <script src="build/app.js" type="module"></script>
 </body>
+
 </html>
