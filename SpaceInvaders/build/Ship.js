@@ -35,5 +35,8 @@ export default class Ship {
     goRight() {
         this.shipX += this.shipVelocityX;
     }
+    getVelocity() {
+        return this.shipVelocityX;
+    }
 }
 //# sourceMappingURL=Ship.js.map

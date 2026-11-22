@@ -55,11 +55,21 @@ export default class Ship {
     //     }
     // }
 
+    /**
+     * guess bro 😭
+     */
     public goLeft(): void {
         this.shipX -= this.shipVelocityX;
     }
 
+    /**
+     * again guess 😭
+     */
     public goRight(): void {
         this.shipX += this.shipVelocityX;
+    }
+
+    public getVelocity(): number {
+        return this.shipVelocityX;
     }
 }
