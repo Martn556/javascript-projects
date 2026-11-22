@@ -46,4 +46,20 @@ export default class Ship {
     public getSprite(): HTMLImageElement {
         return this.spriteImg;
     }
+
+    // public moveShip(direction: Function): void {
+    //     if (direction.code == "ArrowLeft") {
+    //         this.goLeft();
+    //     } else if (direction.code == "ArrowRight") {
+    //         this.goRight();
+    //     }
+    // }
+
+    public goLeft(): void {
+        this.shipX -= this.shipVelocityX;
+    }
+
+    public goRight(): void {
+        this.shipX += this.shipVelocityX;
+    }
 }

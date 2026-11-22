@@ -29,5 +29,11 @@ export default class Ship {
     getSprite() {
         return this.spriteImg;
     }
+    goLeft() {
+        this.shipX -= this.shipVelocityX;
+    }
+    goRight() {
+        this.shipX += this.shipVelocityX;
+    }
 }
 //# sourceMappingURL=Ship.js.map
