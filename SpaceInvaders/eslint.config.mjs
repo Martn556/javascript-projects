@@ -32,7 +32,7 @@ export default tseslint.config(
             "@stylistic/array-bracket-spacing": ["warn", "never"],
             "@stylistic/eol-last": ["warn", "always"],
             "@stylistic/max-statements-per-line": ["warn", { "max": 1 }],
-            "@stylistic/max-len": ["warn", 100, 2, {
+            "@stylistic/max-len": ["warn", 150, 2, {
                 ignoreUrls: true,
                 ignoreComments: false,
                 ignoreRegExpLiterals: true,

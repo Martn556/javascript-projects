@@ -11,13 +11,15 @@ export default class Ship {
 
     private shipVelocityX: number;
 
+    private canvasWidth: number;
+
     /**
      * Creates a ship object
      * @param tileSize Size of tiles
      * @param columns How many colums (x)
      * @param rows How many rows (y)
      */
-    public constructor(tileSize: number, columns: number, rows: number) {
+    public constructor(tileSize: number, columns: number, rows: number, canvasWidth: number) {
         this.shipWidth = tileSize * 2;
         this.shipHeight = tileSize;
         this.shipX = tileSize * columns / 2 - tileSize;
@@ -25,6 +27,7 @@ export default class Ship {
         this.spriteImg = new Image();
         this.spriteImg.src = "../assets/ship.png";
         this.shipVelocityX = tileSize; // Ship moves one tile over
+        this.canvasWidth = canvasWidth;
     }
 
     public getX(): number {
@@ -47,10 +50,16 @@ export default class Ship {
         return this.spriteImg;
     }
 
-    // public moveShip(direction: Function): void {
-    //     if (direction.code == "ArrowLeft") {
+    // /**
+    //  * Moves the ship left if ArrowLeft is pressed or
+    //  * Moves the ship right if ArrowRight is pressed
+    //  * @param e KeyboardEvent
+    //  */
+    // public moveShip(e: KeyboardEvent): void {
+    //     if (e.code == "ArrowLeft" && this.shipX - this.shipVelocityX >= 0) {
     //         this.goLeft();
-    //     } else if (direction.code == "ArrowRight") {
+    //     } else if (e.code == "ArrowRight" &&
+    //  this.shipX + this.shipVelocityX + this.shipWidth <= this.canvasWidth) {
     //         this.goRight();
     //     }
     // }

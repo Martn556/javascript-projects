@@ -5,7 +5,8 @@ export default class Ship {
     shipY;
     spriteImg;
     shipVelocityX;
-    constructor(tileSize, columns, rows) {
+    canvasWidth;
+    constructor(tileSize, columns, rows, canvasWidth) {
         this.shipWidth = tileSize * 2;
         this.shipHeight = tileSize;
         this.shipX = tileSize * columns / 2 - tileSize;
@@ -13,6 +14,7 @@ export default class Ship {
         this.spriteImg = new Image();
         this.spriteImg.src = "../assets/ship.png";
         this.shipVelocityX = tileSize;
+        this.canvasWidth = canvasWidth;
     }
     getX() {
         return this.shipX;

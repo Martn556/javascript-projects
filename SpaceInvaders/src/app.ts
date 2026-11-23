@@ -1,4 +1,5 @@
 import Alien from "./Alien.js";
+import Bullet from "./Bullet.js";
 import Ship from "./Ship.js";
 
 const canvas: HTMLCanvasElement = document.getElementById("board") as HTMLCanvasElement;
@@ -16,13 +17,16 @@ const boardHeight: number = tileSize * rows; // 32 * 16 = 512 px
 
 
 // ship instantiation
-const ship: Ship = new Ship(tileSize, columns, rows);
+const ship: Ship = new Ship(tileSize, columns, rows, canvas.width);
 
 // alien instantiation
 const aliensArray: Alien[] = [];
 let alienRows: number = 2;
 let alienColumns: number = 3;
 let alienCount: number = 0;
+
+// Bullets
+const bulletsArray: Bullet[] = [];
 
 
 window.onload = function (): void {
@@ -34,6 +38,7 @@ window.onload = function (): void {
   c.drawImage(ship.getSprite(), ship.getX(), ship.getY(), ship.getWidth(), ship.getHeight());
   createAliens();
   document.addEventListener("keydown", moveShip);
+  document.addEventListener("keyup", shoot);
   requestAnimationFrame(animate);
 };
 
@@ -41,9 +46,21 @@ window.onload = function (): void {
 function animate(): void {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, innerWidth, innerHeight);
+  // draw ship
   c.drawImage(ship.getSprite(), ship.getX(), ship.getY(), ship.getWidth(), ship.getHeight());
+
+  // aliens
   for (let i: number = 0; i < aliensArray.length; i++) {
-    if (aliensArray[i].isAlive()){
+    if (aliensArray[i].isAlive()) {
+      // make the alien movment a method
+      aliensArray[i].moveRight();
+      if (aliensArray[i].getX() + aliensArray[i].getWidth() >= canvas.width ||
+        aliensArray[i].getX() <= 0) {
+        for (let j: number = 0; j < aliensArray.length; j++) {
+          aliensArray[j].flipVelocity();
+          aliensArray[j].moveByRow(1);
+        }
+      }
       c.drawImage(aliensArray[i].getSprite(),
         aliensArray[i].getX(),
         aliensArray[i].getY(),
@@ -51,9 +68,37 @@ function animate(): void {
         aliensArray[i].getHeight());
     }
   }
+
+  // Bullets
+  for (let i: number = 0; i < bulletsArray.length; i++) {
+    const bullet: Bullet = bulletsArray[i]; // so smart :sob:
+    bullet.update();
+    c.fillStyle = "white";
+    c.fillRect(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
+
+    // Bullet collision with aliens
+    for (let j: number = 0; j < aliensArray.length; j++) {
+      const alien: Alien = aliensArray[j];
+      if (!bullet.isUsed() && alien.isAlive() && detectCollision(bullet, alien)) {
+        bullet.hit();
+        alien.died();
+        alienCount -= 1;
+      }
+    }
+  }
+
+  // Clear bullets
+  while (bulletsArray.length > 0 && (bulletsArray[0].isUsed() || bulletsArray[0].getY() < 0)) {
+    bulletsArray.splice(0, 1);
+  }
+
+  // next level (if all aliens are dead)
+  if (alienCount == 0) {
+    // Increase the number of aliens in columns and rows by 1
+  }
 }
 
-function moveShip(e: any): void { // make this a method inside ship
+function moveShip(e: KeyboardEvent): void { // make this a method inside ship
   if (e.code == "ArrowLeft" && ship.getX() - ship.getVelocity() >= 0) {
     ship.goLeft();
   } else if (e.code == "ArrowRight" && ship.getX() + ship.getVelocity() + ship.getWidth() <= canvas.width) {
@@ -65,8 +110,28 @@ function moveShip(e: any): void { // make this a method inside ship
 function createAliens(): void {
   for (let i: number = 0; i < alienColumns; i++) {
     for (let j: number = 0; j < alienRows; j++) {
-      aliensArray.push(new Alien(tileSize, "../assets/alien.png"));
+      aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j));
     }
   }
   alienCount = aliensArray.length;
 }
+
+function shoot(e: KeyboardEvent): void {
+  if (e.code == "Space") {
+    bulletsArray.push(new Bullet(ship.getX(), ship.getY(), ship.getWidth(), tileSize));
+  }
+}
+
+/**
+ * Square collision detection (USE TRY CATCHING FOR THIS ^^)
+ * @param a object
+ * @param b object
+ * @returns boolean
+ */
+function detectCollision(a: any, b: any): boolean {
+  return a.getX() < b.getX() + b.getWidth() && // a's top left corner doesnt reach b's top right corner
+    a.getX() + a.getWidth() > b.getX() && // a's top right passes b's top left corner
+    a.getY() < b.getY() + b.getHeight() && // a's top left corner doesnt reach b's bottom left corner
+    a.getY() + a.getHeight() > b.getY(); // a's bottom left corner passes b's top left corner
+}
+

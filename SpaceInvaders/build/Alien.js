@@ -5,14 +5,16 @@ export default class Alien {
     alienY;
     spriteImg;
     alive;
-    constructor(tileSize, spritesrc) {
+    alienVelocityX;
+    constructor(tileSize, spritesrc, offsetX, offsetY) {
         this.alienWidth = tileSize * 2;
         this.alienHeight = tileSize;
-        this.alienX = tileSize;
-        this.alienY = tileSize;
+        this.alienX = tileSize + offsetX * this.alienWidth;
+        this.alienY = tileSize + offsetY * this.alienHeight;
         this.spriteImg = new Image();
         this.spriteImg.src = spritesrc;
         this.alive = true;
+        this.alienVelocityX = 1;
     }
     getWidth() {
         return this.alienWidth;
@@ -31,6 +33,19 @@ export default class Alien {
     }
     isAlive() {
         return this.alive;
+    }
+    moveRight() {
+        this.alienX += this.alienVelocityX;
+    }
+    flipVelocity() {
+        this.alienVelocityX *= -1;
+        this.alienX += this.alienVelocityX * 2;
+    }
+    moveByRow(rows) {
+        this.alienY += this.alienHeight * rows;
+    }
+    died() {
+        this.alive = false;
     }
 }
 //# sourceMappingURL=Alien.js.map

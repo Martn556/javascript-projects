@@ -11,16 +11,19 @@ export default class Alien {
 
     private alive: boolean;
 
-    public constructor(tileSize: number, spritesrc: string) {
+    private alienVelocityX: number;
+
+    public constructor(tileSize: number, spritesrc: string, offsetX: number, offsetY: number) {
         this.alienWidth = tileSize * 2;
         this.alienHeight = tileSize;
-        this.alienX = tileSize;
-        this.alienY = tileSize;
+        this.alienX = tileSize + offsetX * this.alienWidth;
+        this.alienY = tileSize + offsetY * this.alienHeight;
 
         this.spriteImg = new Image();
         this.spriteImg.src = spritesrc;
 
         this.alive = true;
+        this.alienVelocityX = 1;
     }
 
     public getWidth(): number {
@@ -49,5 +52,36 @@ export default class Alien {
      */
     public isAlive(): boolean {
         return this.alive;
+    }
+
+    /**
+     * moves Alien right by velocity
+     */
+    public moveRight(): void {
+        this.alienX += this.alienVelocityX;
+    }
+
+    /**
+     * Flips the veloicty of the alien and makes it travel the other way
+     * multiplies the velocity by -1
+     */
+    public flipVelocity(): void {
+        this.alienVelocityX *= -1;
+        this.alienX += this.alienVelocityX * 2;
+    }
+
+    /**
+     * Moves the alien by the specified row
+     * @param rows How many rows to move down by
+     */
+    public moveByRow(rows: number): void {
+        this.alienY += this.alienHeight * rows;
+    }
+
+    /**
+     * Sets alive to false
+     */
+    public died(): void {
+        this.alive = false;
     }
 }
