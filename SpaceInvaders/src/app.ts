@@ -6,7 +6,7 @@ const canvas: HTMLCanvasElement = document.getElementById("board") as HTMLCanvas
 
 const c: CanvasRenderingContext2D = canvas.getContext("2d") as CanvasRenderingContext2D; // canvas api start
 
-
+// TODO: CHALLENGES, random colour to aliens, aliens randomly fire back, add a game over screen
 const tileSize: number = 32;
 const rows: number = 16;
 const columns: number = 16;
@@ -20,14 +20,20 @@ const boardHeight: number = tileSize * rows; // 32 * 16 = 512 px
 const ship: Ship = new Ship(tileSize, columns, rows, canvas.width);
 
 // alien instantiation
-const aliensArray: Alien[] = [];
+// const aliensArray: Alien[] = [];
+let aliensArray: Alien[] = [];
 let alienRows: number = 2;
 let alienColumns: number = 3;
 let alienCount: number = 0;
+let alienVel: number = 1;
 
 // Bullets
-const bulletsArray: Bullet[] = [];
+// const bulletsArray: Bullet[] = [];
+let bulletsArray: Bullet[] = [];
 
+// PlayerScore
+let score: number = 0;
+let gameOver: boolean = false;
 
 window.onload = function (): void {
   canvas.width = boardWidth;
@@ -44,6 +50,9 @@ window.onload = function (): void {
 
 
 function animate(): void {
+  if (gameOver) {
+    return;
+  }
   requestAnimationFrame(animate);
   c.clearRect(0, 0, innerWidth, innerHeight);
   // draw ship
@@ -67,6 +76,10 @@ function animate(): void {
         aliensArray[i].getWidth(),
         aliensArray[i].getHeight());
     }
+    // If the arrays reach the same y as the player game over is set to true
+    if (aliensArray[i].getY() >= ship.getY()){
+      gameOver = true;
+    }
   }
 
   // Bullets
@@ -83,6 +96,7 @@ function animate(): void {
         bullet.hit();
         alien.died();
         alienCount -= 1;
+        score += 100;
       }
     }
   }
@@ -95,10 +109,24 @@ function animate(): void {
   // next level (if all aliens are dead)
   if (alienCount == 0) {
     // Increase the number of aliens in columns and rows by 1
+    alienColumns = Math.min(alienColumns + 1, columns / 2 - 2); // cap is at 16 / 2 - 2 = 6 Max rows of aliens
+    alienRows = Math.min(alienRows + 1, rows - 4); // cap at 16 - 4 = 12
+    alienVel += 0.2; // increases the alien movement speed
+    aliensArray = [];
+    bulletsArray = [];
+    createAliens();
   }
+
+  // score display
+  c.fillStyle = "white";
+  c.font = "16px courier";
+  c.fillText(`${score}`, 5, 20);
 }
 
 function moveShip(e: KeyboardEvent): void { // make this a method inside ship
+  if (gameOver) { // this is to deal with the asynchronus bs
+    return;
+  }
   if (e.code == "ArrowLeft" && ship.getX() - ship.getVelocity() >= 0) {
     ship.goLeft();
   } else if (e.code == "ArrowRight" && ship.getX() + ship.getVelocity() + ship.getWidth() <= canvas.width) {
@@ -110,13 +138,16 @@ function moveShip(e: KeyboardEvent): void { // make this a method inside ship
 function createAliens(): void {
   for (let i: number = 0; i < alienColumns; i++) {
     for (let j: number = 0; j < alienRows; j++) {
-      aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j));
+      aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j, alienVel));
     }
   }
   alienCount = aliensArray.length;
 }
 
 function shoot(e: KeyboardEvent): void {
+  if (gameOver) { // this is to deal with the asynchronus bs
+    return;
+  }
   if (e.code == "Space") {
     bulletsArray.push(new Bullet(ship.getX(), ship.getY(), ship.getWidth(), tileSize));
   }

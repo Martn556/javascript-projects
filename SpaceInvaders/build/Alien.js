@@ -6,7 +6,7 @@ export default class Alien {
     spriteImg;
     alive;
     alienVelocityX;
-    constructor(tileSize, spritesrc, offsetX, offsetY) {
+    constructor(tileSize, spritesrc, offsetX, offsetY, velX) {
         this.alienWidth = tileSize * 2;
         this.alienHeight = tileSize;
         this.alienX = tileSize + offsetX * this.alienWidth;
@@ -14,7 +14,7 @@ export default class Alien {
         this.spriteImg = new Image();
         this.spriteImg.src = spritesrc;
         this.alive = true;
-        this.alienVelocityX = 1;
+        this.alienVelocityX = velX;
     }
     getWidth() {
         return this.alienWidth;

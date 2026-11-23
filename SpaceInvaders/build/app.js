@@ -9,11 +9,14 @@ const columns = 16;
 const boardWidth = tileSize * columns;
 const boardHeight = tileSize * rows;
 const ship = new Ship(tileSize, columns, rows, canvas.width);
-const aliensArray = [];
+let aliensArray = [];
 let alienRows = 2;
 let alienColumns = 3;
 let alienCount = 0;
-const bulletsArray = [];
+let alienVel = 1;
+let bulletsArray = [];
+let score = 0;
+let gameOver = false;
 window.onload = function () {
     canvas.width = boardWidth;
     canvas.height = boardHeight;
@@ -24,6 +27,9 @@ window.onload = function () {
     requestAnimationFrame(animate);
 };
 function animate() {
+    if (gameOver) {
+        return;
+    }
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
     c.drawImage(ship.getSprite(), ship.getX(), ship.getY(), ship.getWidth(), ship.getHeight());
@@ -39,6 +45,9 @@ function animate() {
             }
             c.drawImage(aliensArray[i].getSprite(), aliensArray[i].getX(), aliensArray[i].getY(), aliensArray[i].getWidth(), aliensArray[i].getHeight());
         }
+        if (aliensArray[i].getY() >= ship.getY()) {
+            gameOver = true;
+        }
     }
     for (let i = 0; i < bulletsArray.length; i++) {
         const bullet = bulletsArray[i];
@@ -51,6 +60,7 @@ function animate() {
                 bullet.hit();
                 alien.died();
                 alienCount -= 1;
+                score += 100;
             }
         }
     }
@@ -58,9 +68,21 @@ function animate() {
         bulletsArray.splice(0, 1);
     }
     if (alienCount == 0) {
+        alienColumns = Math.min(alienColumns + 1, columns / 2 - 2);
+        alienRows = Math.min(alienRows + 1, rows - 4);
+        alienVel += 0.2;
+        aliensArray = [];
+        bulletsArray = [];
+        createAliens();
     }
+    c.fillStyle = "white";
+    c.font = "16px courier";
+    c.fillText(`${score}`, 5, 20);
 }
 function moveShip(e) {
+    if (gameOver) {
+        return;
+    }
     if (e.code == "ArrowLeft" && ship.getX() - ship.getVelocity() >= 0) {
         ship.goLeft();
     }
@@ -71,12 +93,15 @@ function moveShip(e) {
 function createAliens() {
     for (let i = 0; i < alienColumns; i++) {
         for (let j = 0; j < alienRows; j++) {
-            aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j));
+            aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j, alienVel));
         }
     }
     alienCount = aliensArray.length;
 }
 function shoot(e) {
+    if (gameOver) {
+        return;
+    }
     if (e.code == "Space") {
         bulletsArray.push(new Bullet(ship.getX(), ship.getY(), ship.getWidth(), tileSize));
     }
