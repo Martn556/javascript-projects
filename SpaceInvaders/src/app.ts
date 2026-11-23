@@ -140,16 +140,16 @@ function createAliens(): void {
     for (let j: number = 0; j < alienRows; j++) {
       const rndNumb: number = randomNumber(1, 4);
       if (rndNumb == 1) {
-        aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j, alienVel));
+        aliensArray.push(new Alien(tileSize, "./assets/alien.png", i, j, alienVel));
       }
       if (rndNumb == 2) {
-        aliensArray.push(new Alien(tileSize, "../assets/alien-cyan.png", i, j, alienVel));
+        aliensArray.push(new Alien(tileSize, "./assets/alien-cyan.png", i, j, alienVel));
       }
       if (rndNumb == 3) {
-        aliensArray.push(new Alien(tileSize, "../assets/alien-magenta.png", i, j, alienVel));
+        aliensArray.push(new Alien(tileSize, "./assets/alien-magenta.png", i, j, alienVel));
       }
       if (rndNumb == 4) {
-        aliensArray.push(new Alien(tileSize, "../assets/alien-yellow.png", i, j, alienVel));
+        aliensArray.push(new Alien(tileSize, "./assets/alien-yellow.png", i, j, alienVel));
       }
     }
   }
