@@ -77,7 +77,7 @@ function animate(): void {
         aliensArray[i].getHeight());
     }
     // If the arrays reach the same y as the player game over is set to true
-    if (aliensArray[i].getY() >= ship.getY()){
+    if (aliensArray[i].getY() >= ship.getY()) {
       gameOver = true;
     }
   }
@@ -138,7 +138,19 @@ function moveShip(e: KeyboardEvent): void { // make this a method inside ship
 function createAliens(): void {
   for (let i: number = 0; i < alienColumns; i++) {
     for (let j: number = 0; j < alienRows; j++) {
-      aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j, alienVel));
+      const rndNumb: number = randomNumber(1, 4);
+      if (rndNumb == 1) {
+        aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j, alienVel));
+      }
+      if (rndNumb == 2) {
+        aliensArray.push(new Alien(tileSize, "../assets/alien-cyan.png", i, j, alienVel));
+      }
+      if (rndNumb == 3) {
+        aliensArray.push(new Alien(tileSize, "../assets/alien-magenta.png", i, j, alienVel));
+      }
+      if (rndNumb == 4) {
+        aliensArray.push(new Alien(tileSize, "../assets/alien-yellow.png", i, j, alienVel));
+      }
     }
   }
   alienCount = aliensArray.length;
@@ -166,3 +178,6 @@ function detectCollision(a: any, b: any): boolean {
     a.getY() + a.getHeight() > b.getY(); // a's bottom left corner passes b's top left corner
 }
 
+function randomNumber(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

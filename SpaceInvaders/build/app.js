@@ -93,7 +93,19 @@ function moveShip(e) {
 function createAliens() {
     for (let i = 0; i < alienColumns; i++) {
         for (let j = 0; j < alienRows; j++) {
-            aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j, alienVel));
+            const rndNumb = randomNumber(1, 4);
+            if (rndNumb == 1) {
+                aliensArray.push(new Alien(tileSize, "../assets/alien.png", i, j, alienVel));
+            }
+            if (rndNumb == 2) {
+                aliensArray.push(new Alien(tileSize, "../assets/alien-cyan.png", i, j, alienVel));
+            }
+            if (rndNumb == 3) {
+                aliensArray.push(new Alien(tileSize, "../assets/alien-magenta.png", i, j, alienVel));
+            }
+            if (rndNumb == 4) {
+                aliensArray.push(new Alien(tileSize, "../assets/alien-yellow.png", i, j, alienVel));
+            }
         }
     }
     alienCount = aliensArray.length;
@@ -111,5 +123,8 @@ function detectCollision(a, b) {
         a.getX() + a.getWidth() > b.getX() &&
         a.getY() < b.getY() + b.getHeight() &&
         a.getY() + a.getHeight() > b.getY();
+}
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 //# sourceMappingURL=app.js.map
