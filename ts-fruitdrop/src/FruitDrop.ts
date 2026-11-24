@@ -3,6 +3,7 @@ import Game from "./Game.js";
 import CanvasRenderer from "./CanvasRenderer.js";
 import Fruit from "./Fruit.js";
 import Spider from "./Spider.js";
+import Player from "./Player.js";
 
 export default class FruitDrop extends Game {
   private canvas: HTMLCanvasElement;
@@ -10,6 +11,8 @@ export default class FruitDrop extends Game {
   private fruits: Fruit[];
 
   private spiders: Spider[];
+
+  private player: Player;
 
   public constructor(canvas: HTMLCanvasElement) {
     super();
@@ -20,6 +23,7 @@ export default class FruitDrop extends Game {
     this.spiders = [];
     this.fruits.push(new Fruit(canvas.width));
     this.spiders.push(new Spider(canvas.width));
+    this.player = new Player(canvas.width, canvas.height);
   }
 
   /**
@@ -42,7 +46,6 @@ export default class FruitDrop extends Game {
     for (const spider of this.spiders) {
       spider.update(delta);
     }
-    this.render();
     return true;
   }
 
@@ -55,5 +58,6 @@ export default class FruitDrop extends Game {
 
     this.fruits[0].render(this.canvas);
     this.spiders[0].render(this.canvas);
+    this.player.render(this.canvas);
   }
 }
