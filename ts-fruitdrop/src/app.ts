@@ -1,3 +1,4 @@
+import CanvasRenderer from "./CanvasRenderer.js";
 import FruitDrop from "./FruitDrop.js";
 
 const fruitDrop: FruitDrop = new FruitDrop(document.getElementById("game") as HTMLCanvasElement);
@@ -5,3 +6,5 @@ const fruitDrop: FruitDrop = new FruitDrop(document.getElementById("game") as HT
 window.addEventListener("load", () => {
   fruitDrop.start();
 });
+
+CanvasRenderer.test();
