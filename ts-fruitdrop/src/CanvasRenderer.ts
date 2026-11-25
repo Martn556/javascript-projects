@@ -199,11 +199,4 @@ export default class CanvasRenderer {
     ctx.rect(dx, dy, width, height);
     ctx.fill();
   }
-
-  /**
-   * Logs in the console
-   */
-  public static test(): void{
-    console.log("ran");
-  }
 }

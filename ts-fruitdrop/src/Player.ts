@@ -1,4 +1,7 @@
 import CanvasRenderer from "./CanvasRenderer.js";
+import Fruit from "./Fruit.js";
+import FruitDrop from "./FruitDrop.js";
+import Spider from "./Spider.js";
 
 export default class Player {
   private images: HTMLImageElement;
@@ -26,23 +29,47 @@ export default class Player {
     this.posX = maxX / 2 - this.width / 2;
     this.posY = maxY * 90 / 100;
     this.maxX = maxX;
-    this.speed = 10;
+    this.speed = 1;
     this.moveingLeft = false;
     this.moveingRight = false;
   }
 
+  /**
+   * Sets a flag that tells the player to move left during update
+   */
   public moveLeft(): void {
     this.moveingLeft = true;
   }
 
+  /**
+   *  Sets a flag that tells the player to move right during update
+   */
   public moveRight(): void {
     this.moveingRight = true;
   }
 
-  public update(canvas: HTMLCanvasElement): void {
-    if (this.moveingLeft) {
-      this.posX -= this.speed;
+  public isCollidingFruit(fruit: Fruit): boolean {
+    return (fruit.getPosX() + fruit.getWidth() > this.posX) &&
+           (fruit.getPosX() < this.posX + this.width) &&
+           (fruit.getPosY() + fruit.getHeight() > this.posY) &&
+           (fruit.getPosY() < this.posY + this.height);
+  }
+
+  // public isCollidingSpider(spider: Spider): boolean {
+
+  // }
+
+  public update(delta: number): void {
+    if (this.moveingLeft && this.posX > 0) {
+      this.posX -= this.speed * delta;
     }
+
+    if (this.moveingRight && this.posX + this.width < this.maxX) {
+      this.posX += this.speed * delta;
+    }
+
+    this.moveingLeft = false;
+    this.moveingRight = false;
   }
 
   public render(canvas: HTMLCanvasElement): void {

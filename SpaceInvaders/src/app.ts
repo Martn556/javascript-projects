@@ -140,7 +140,7 @@ function createAliens(): void {
     for (let j: number = 0; j < alienRows; j++) {
       const rndNumb: number = randomNumber(1, 4);
       if (rndNumb == 1) {
-        aliensArray.push(new Alien(tileSize, "./assets/alien.png", i, j, alienVel));
+        aliensArray.push(new Alien(tileSize, "./assets/alien.png", i, j, alienVel)); // app.ts gets called in index.html (not in src so you dont have to use ..)
       }
       if (rndNumb == 2) {
         aliensArray.push(new Alien(tileSize, "./assets/alien-cyan.png", i, j, alienVel));
@@ -171,7 +171,7 @@ function shoot(e: KeyboardEvent): void {
  * @param b object
  * @returns boolean
  */
-function detectCollision(a: any, b: any): boolean {
+function detectCollision(a: Bullet, b: Alien): boolean {
   return a.getX() < b.getX() + b.getWidth() && // a's top left corner doesnt reach b's top right corner
     a.getX() + a.getWidth() > b.getX() && // a's top right passes b's top left corner
     a.getY() < b.getY() + b.getHeight() && // a's top left corner doesnt reach b's bottom left corner

@@ -18,8 +18,25 @@ export default class Fruit {
   public constructor(maxX: number) {
     this.image = CanvasRenderer.loadNewImage("./assets/fruit-banana.png");
     this.score = 0;
+    const rndNumb: number = Math.random();
+    if (0.1 > rndNumb) {
+      this.score = 10;
+      this.image = CanvasRenderer.loadNewImage("./assets/fruit-cherries.png");
+    } else if (0.3 > rndNumb) {
+      this.score = 7;
+      this.image = CanvasRenderer.loadNewImage("./assets/fruit-strawberry.png");
+    } else if (0.6 > rndNumb) {
+      this.score = 5;
+      this.image = CanvasRenderer.loadNewImage("./assets/fruit-orange.png");
+    } else if (0.8 > rndNumb) {
+      this.score = 3;
+      this.image = CanvasRenderer.loadNewImage("./assets/fruit-grapes.png");
+    } else if (1 >= rndNumb) {
+      this.score = 1;
+      this.image = CanvasRenderer.loadNewImage("./assets/fruit-banana.png");
+    }
     this.posX = Math.random() * maxX;
-    this.posY = -32;
+    this.posY = -60;
     this.speed = 0.3;
     this.width = 32;
     this.height = 32;
@@ -31,7 +48,7 @@ export default class Fruit {
    */
   public update(delta: number): void {
     this.posY += this.speed * delta;
-    this.speed += 0.01;
+    this.speed += 0.0001 * delta;
   }
 
   /**

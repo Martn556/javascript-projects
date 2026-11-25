@@ -31,7 +31,7 @@ export default class Spider {
    */
   public update(delta: number): void {
     this.posY += this.speed * delta;
-    this.speed += 0.01;
+    this.speed += 0.000001 * delta;
   }
 
   /**

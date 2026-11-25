@@ -6,5 +6,3 @@ const fruitDrop: FruitDrop = new FruitDrop(document.getElementById("game") as HT
 window.addEventListener("load", () => {
   fruitDrop.start();
 });
-
-CanvasRenderer.test();
