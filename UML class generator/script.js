@@ -25,3 +25,15 @@ atributes.onkeydown = () => {
 operations.onkeydown = () => {
     classOperations.innerText = operations.value;
 }
+
+title.onkeyup = () => {
+    classTitle.innerText = title.value;
+}
+
+atributes.onkeyup = () => {
+    classAttributes.innerText = atributes.value;
+}
+
+operations.onkeyup = () => {
+    classOperations.innerText = operations.value;
+}
