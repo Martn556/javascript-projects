@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.classContainter {
+    border-style: solid;
+    border-width: 5px;
+    display: inline-block;
+    margin-left: 50%;
+}
+
+#classTitle {
+    padding-left: 30px;
+    padding-right: 30px;
+    border-bottom: 5px solid rgb(0, 0, 0);
+}
+
+#topPart {
+    height: 300px;
+    text-align: center;
+    /* white-space: pre-wrap; */
+}
+
+#classAttributes {
+    padding-left: 5px;
+    white-space: pre-wrap;
+}
