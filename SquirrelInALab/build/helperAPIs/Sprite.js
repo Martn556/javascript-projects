@@ -6,16 +6,21 @@ export default class Sprite {
     height;
     spriteImg;
     physics;
-    constructor(x, y, w, h, spriteImg, physics = false) {
+    constructor(x, y, w, h, spriteImg, physics) {
         this.posX = x;
         this.posY = y;
         this.width = w;
         this.height = h;
         this.spriteImg = spriteImg;
-        this.physics = physics;
+        if (physics == undefined) {
+            this.physics = false;
+        }
+        else {
+            this.physics = physics;
+        }
     }
     render(canvas) {
-        CanvasRenderer.drawImage(canvas, this.spriteImg, this.posX, this.posY);
+        CanvasRenderer.drawImage(canvas, this.spriteImg, this.posX, this.posY, this.width, this.height);
     }
 }
 //# sourceMappingURL=Sprite.js.map
