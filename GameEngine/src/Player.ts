@@ -105,16 +105,17 @@ export default class Player extends Sprite {
      * overridden update from sprite
      */
     public override update(delta: number): void {
-    if (this.movingLeft) {
-        this.posX -= this.speed * delta;
-        this.movingLeft = false;
-    }
+        this.posX += 0 * delta;
+        // if (this.movingLeft) {
+        //     this.posX -= this.speed * delta;
+        //     this.movingLeft = false;
+        // }
 
-    if (this.movingRight) {
-        this.posX += this.speed * delta;
-        this.movingRight = false;
-    }
+        // if (this.movingRight) {
+        //     this.posX += this.speed * delta;
+        //     this.movingRight = false;
+        // }
 
-    this.updateJump(delta);
-}
+        // this.updateJump(delta);
+    }
 }

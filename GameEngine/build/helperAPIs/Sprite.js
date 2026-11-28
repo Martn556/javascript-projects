@@ -1,6 +1,5 @@
+import CanvasRenderer from "./CanvasRenderer.js";
 export default class Sprite {
-    canvas;
-    c;
     posX;
     posY;
     width;
@@ -8,14 +7,11 @@ export default class Sprite {
     spriteImg;
     physics;
     constructor(x, y, w, h, spriteImg, physics) {
-        this.canvas = document.getElementById("game");
-        this.c = this.canvas.getContext("2d");
         this.posX = x;
         this.posY = y;
         this.width = w;
         this.height = h;
-        this.spriteImg = new Image();
-        this.spriteImg.src = spriteImg;
+        this.spriteImg = CanvasRenderer.loadNewImage(spriteImg);
         if (physics == undefined) {
             this.physics = false;
         }
@@ -24,7 +20,7 @@ export default class Sprite {
         }
     }
     render(canvas) {
-        this.c.drawImage(this.spriteImg, this.posX, this.posY, this.width, this.height);
+        CanvasRenderer.drawImage(canvas, this.spriteImg, this.posX, this.posY);
     }
 }
 //# sourceMappingURL=Sprite.js.map

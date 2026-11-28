@@ -3,6 +3,7 @@ import CanvasRenderer from "./helperAPIs/CanvasRenderer.js";
 
 import KeyListener from "./helperAPIs/KeyListener.js";
 import Player from "./Player.js";
+import Test from "./Test.js";
 
 export default class GameEngine extends Game {
     private canvas: HTMLCanvasElement;
@@ -11,6 +12,7 @@ export default class GameEngine extends Game {
 
     private keyListener: KeyListener;
 
+    private test: Test;
 
     public constructor(canvas: HTMLCanvasElement) {
         super();
@@ -18,7 +20,8 @@ export default class GameEngine extends Game {
         this.canvas.height = window.innerHeight; // TODO: change the window size
         this.canvas.width = window.innerWidth;
         this.keyListener = new KeyListener();
-        this.player = new Player(0, 350, 100, 150, "./assets/hitbox.png", false);
+        this.player = new Player(0, 0, 0, 0, "./assets/hitbox.png", false);
+        this.test = new Test(0, 0, 0, 0, "./assets/ball.png", false);
     }
 
     /**
@@ -40,7 +43,8 @@ export default class GameEngine extends Game {
      * @returns true if the game should continue
      */
     public update(delta: number): boolean {
-    this.player.update(delta);
+    // this.player.update(delta);
+    this.test.update(delta);
     return true;
 }
 
@@ -51,6 +55,7 @@ export default class GameEngine extends Game {
     public render(): void {
         // Clear the canvas
         CanvasRenderer.clearCanvas(this.canvas); //Dont remove this
-        this.player.render(this.canvas);
+        // this.player.render(this.canvas);
+        this.test.render(this.canvas);
     }
 }

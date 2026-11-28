@@ -1,4 +1,4 @@
-import CanvasRenderer from "./CanvasRenderer";
+import CanvasRenderer from "./CanvasRenderer.js";
 
 export default abstract class Sprite {
     // private canvas: HTMLCanvasElement;
@@ -27,10 +27,6 @@ export default abstract class Sprite {
      * @param [physics=false] By default physics are set to false, set this to true if you want your object to be affected by gravity
      */
     public constructor(x: number, y: number, w: number, h: number, spriteImg: string, physics?: boolean) {
-        // this.canvas = document.getElementById("game") as HTMLCanvasElement;
-        // this.c = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-        // this.spriteImg = new Image();
-        // this.spriteImg.src = spriteImg;
         this.posX = x;
         this.posY = y;
         this.width = w;
@@ -51,6 +47,9 @@ export default abstract class Sprite {
 
     /**
      * Renders the sprite image at its current position
+     * 2 Options:
+     * One use the CanvasRenderer.drawImage() method
+     * Two use the CanvasRenderer.drawImageAndStrech() method
      * @param canvas Canvas :p (HTMLCanvasElement)
      */
     public render(canvas: HTMLCanvasElement): void {

@@ -65,6 +65,18 @@ export default class CanvasRenderer {
     ctx.drawImage(image, dx, dy);
   }
 
+  public static drawImageAndStrech(
+    canvas: HTMLCanvasElement,
+    image: HTMLImageElement,
+    dx: number,
+    dy: number,
+    dwidth: number,
+    dheight: number
+  ): void {
+    const ctx: CanvasRenderingContext2D = CanvasRenderer.getCanvasContext(canvas);
+    ctx.drawImage(image, dx, dy, dwidth, dheight);
+  }
+
   /**
    * Clear the canvas, preparing for drawing
    *

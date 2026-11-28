@@ -51,15 +51,7 @@ export default class Player extends Sprite {
         }
     }
     update(delta) {
-        if (this.movingLeft) {
-            this.posX -= this.speed * delta;
-            this.movingLeft = false;
-        }
-        if (this.movingRight) {
-            this.posX += this.speed * delta;
-            this.movingRight = false;
-        }
-        this.updateJump(delta);
+        this.posX += 0 * delta;
     }
 }
 //# sourceMappingURL=Player.js.map

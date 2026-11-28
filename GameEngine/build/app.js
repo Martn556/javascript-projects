@@ -1,6 +1,6 @@
-import SquirrelInALab from "./SquirrelInALab.js";
-const squirrelInALab = new SquirrelInALab(document.getElementById("game"));
+import GameEngine from "./GameEngine.js";
+const gameEngine = new GameEngine(document.getElementById("game"));
 window.addEventListener("load", () => {
-    squirrelInALab.start();
+    gameEngine.start();
 });
 //# sourceMappingURL=app.js.map

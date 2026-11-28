@@ -18,7 +18,11 @@ export default class CanvasRenderer {
         img.src = source;
         return img;
     }
-    static drawImage(canvas, image, dx, dy, dwidth, dheight) {
+    static drawImage(canvas, image, dx, dy) {
+        const ctx = CanvasRenderer.getCanvasContext(canvas);
+        ctx.drawImage(image, dx, dy);
+    }
+    static drawImageAndStrech(canvas, image, dx, dy, dwidth, dheight) {
         const ctx = CanvasRenderer.getCanvasContext(canvas);
         ctx.drawImage(image, dx, dy, dwidth, dheight);
     }
