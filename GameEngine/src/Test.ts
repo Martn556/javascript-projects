@@ -19,7 +19,7 @@ export default class Test extends Sprite {
         this.posX += 0 * delta;
     }
 
-    // public override render(canvas: HTMLCanvasElement): void {
-    //     CanvasRenderer.drawImageAndStrech(canvas, this.spriteImg, this.posX, this.posX, this.width, this.height);
-    // }
+    public override render(canvas: HTMLCanvasElement): void {
+        CanvasRenderer.drawImageAndStrech(canvas, this.spriteImg, this.posX, this.posY, this.width, this.height);
+    }
 }

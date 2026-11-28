@@ -8,7 +8,7 @@ export default class Test extends Sprite {
         this.posX += 0 * delta;
     }
     render(canvas) {
-        CanvasRenderer.drawImageAndStrech(canvas, this.spriteImg, this.posX, this.posX, this.width, this.height);
+        CanvasRenderer.drawImageAndStrech(canvas, this.spriteImg, this.posX, this.posY, this.width, this.height);
     }
 }
 //# sourceMappingURL=Test.js.map

@@ -21,7 +21,7 @@ export default class GameEngine extends Game {
         this.canvas.width = window.innerWidth;
         this.keyListener = new KeyListener();
         this.player = new Player(0, 0, 0, 0, "./assets/hitbox.png", false);
-        this.test = new Test(0, 0, 0, 0, "./assets/ball.png", false);
+        this.test = new Test(0, 0, 1000, 100, "./assets/ball.png", false);
     }
 
     /**
