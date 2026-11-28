@@ -22,9 +22,9 @@ export default class SquirrelInALab extends Game {
         this.canvas.height = window.innerHeight; // TODO: change the window size
         this.canvas.width = window.innerWidth;
         this.keyListener = new KeyListener();
-        this.player = new Player(250, 350, 50, 30, CanvasRenderer.loadNewImage("./assets/playerph.svg"), false);
+        this.player = new Player(250, 350, 150, 150, CanvasRenderer.loadNewImage("./assets/playerph.svg"), false);
         this.hitboxes = [];
-        this.hitboxes.push(new Hitbox(0, 250, canvas.width, 150, CanvasRenderer.loadNewImage("./assets/hitbox.png"), false));
+        this.hitboxes.push(new Hitbox(0, 250, canvas.width, canvas.height, CanvasRenderer.loadNewImage("./assets/hitbox.png"), false));
     }
 
     /**
@@ -58,8 +58,6 @@ export default class SquirrelInALab extends Game {
         // Clear the canvas
         CanvasRenderer.clearCanvas(this.canvas); //Dont remove this
         this.player.render(this.canvas);
-        console.log(this.hitboxes);
-        
         this.hitboxes[0].render(this.canvas);
     }
 }
