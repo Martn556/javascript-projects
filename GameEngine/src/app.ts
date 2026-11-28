@@ -1,7 +1,7 @@
-import SquirrelInALab from "./SquirrelInALab.js";
+import GameEngine from "./GameEngine.js";
 
-const squirrelInALab: SquirrelInALab = new SquirrelInALab(document.getElementById("game") as HTMLCanvasElement);
+const gameEngine: GameEngine = new GameEngine(document.getElementById("game") as HTMLCanvasElement);
 
 window.addEventListener("load", () => {
-  squirrelInALab.start();
+  gameEngine.start();
 });

@@ -1,7 +1,9 @@
-export default abstract class Sprite {
-    private canvas: HTMLCanvasElement;
+import CanvasRenderer from "./CanvasRenderer";
 
-    private c: CanvasRenderingContext2D;
+export default abstract class Sprite {
+    // private canvas: HTMLCanvasElement;
+
+    // private c: CanvasRenderingContext2D;
 
     protected posX: number;
 
@@ -21,18 +23,19 @@ export default abstract class Sprite {
      * @param y Starting position Y of your Sprite
      * @param w Width of your sprite
      * @param h Height of your sprite
-     * @param spriteImg the image that will be displayed for this sprite (example: CanvasRenderer.loadNewImage("./assets/playerph.svg"))
+     * @param spriteImg The path that the sprite will use to render its image !Everything starts from index example: "./assets/hitbox.png"
      * @param [physics=false] By default physics are set to false, set this to true if you want your object to be affected by gravity
      */
     public constructor(x: number, y: number, w: number, h: number, spriteImg: string, physics?: boolean) {
-        this.canvas = document.getElementById("game") as HTMLCanvasElement;
-        this.c = this.canvas.getContext("2d") as CanvasRenderingContext2D;
+        // this.canvas = document.getElementById("game") as HTMLCanvasElement;
+        // this.c = this.canvas.getContext("2d") as CanvasRenderingContext2D;
+        // this.spriteImg = new Image();
+        // this.spriteImg.src = spriteImg;
         this.posX = x;
         this.posY = y;
         this.width = w;
         this.height = h;
-        this.spriteImg = new Image();
-        this.spriteImg.src = spriteImg;
+        this.spriteImg = CanvasRenderer.loadNewImage(spriteImg);
         if (physics == undefined) {
             this.physics = false;
         } else {
@@ -51,6 +54,6 @@ export default abstract class Sprite {
      * @param canvas Canvas :p (HTMLCanvasElement)
      */
     public render(canvas: HTMLCanvasElement): void {
-        this.c.drawImage(this.spriteImg, this.posX, this.posY, this.width, this.height);
+        CanvasRenderer.drawImage(canvas, this.spriteImg, this.posX, this.posY);
     }
 }
