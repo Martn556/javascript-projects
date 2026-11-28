@@ -12,8 +12,8 @@ export default class Test extends Sprite {
     }
 
     /**
-     * die
-     * @param delta die
+     * blah
+     * @param delta blah blah
      */
     public override update(delta: number): void {
         this.posX += 0 * delta;

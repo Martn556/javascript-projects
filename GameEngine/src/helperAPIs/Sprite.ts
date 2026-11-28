@@ -46,6 +46,7 @@ export default abstract class Sprite {
     public abstract update(delta: number): void;
 
     /**
+     * ? Override this method if you want special rendering
      * Renders the sprite image at its current position
      * 2 Options:
      * One use the CanvasRenderer.drawImage() method
