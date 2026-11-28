@@ -4,6 +4,7 @@ export default class Hitbox extends Sprite {
         super(x, y, w, h, spriteImg, physics);
     }
     update(delta) {
+        this.posX += 0 * delta;
     }
 }
 //# sourceMappingURL=Hitbox.js.map
