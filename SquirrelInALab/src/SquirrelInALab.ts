@@ -3,6 +3,8 @@ import Game from "./helperAPIs/Game.js";
 import CanvasRenderer from "./helperAPIs/CanvasRenderer.js";
 import KeyListener from "./helperAPIs/KeyListener.js";
 import Player from "./Player.js";
+import Sprite from "./helperAPIs/Sprite.js";
+import Hitbox from "./helperAPIs/Hitbox.js";
 
 export default class SquirrelInALab extends Game {
     private canvas: HTMLCanvasElement;
@@ -10,6 +12,8 @@ export default class SquirrelInALab extends Game {
     private player: Player;
 
     private keyListener: KeyListener;
+
+    private hitboxes: Sprite[];
 
 
     public constructor(canvas: HTMLCanvasElement) {
@@ -19,6 +23,8 @@ export default class SquirrelInALab extends Game {
         this.canvas.width = window.innerWidth;
         this.keyListener = new KeyListener();
         this.player = new Player(250, 350, 50, 30, CanvasRenderer.loadNewImage("./assets/playerph.svg"), false);
+        this.hitboxes = [];
+        this.hitboxes.push(new Hitbox(250, 250, 3000, 50, CanvasRenderer.loadNewImage("./assets/playerph.svg"), false));
     }
 
     /**
@@ -52,6 +58,6 @@ export default class SquirrelInALab extends Game {
         // Clear the canvas
         CanvasRenderer.clearCanvas(this.canvas); //Dont remove this
         this.player.render(this.canvas);
-        CanvasRenderer.drawRectangle(this.canvas, 20, 20, 1000, 10);
+        this.hitboxes[0].render(this.canvas);
     }
 }

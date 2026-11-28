@@ -46,6 +46,6 @@ export default abstract class Sprite {
      * @param canvas Canvas :p (HTMLCanvasElement)
      */
     public render(canvas: HTMLCanvasElement): void {
-        CanvasRenderer.drawImage(canvas, this.spriteImg, this.posX, this.posY);
+        CanvasRenderer.drawImage(canvas, this.spriteImg, this.posX, this.posY, this.width, this.height);
     }
 }

@@ -47,13 +47,33 @@ export default class CanvasRenderer {
     return img;
   }
 
-  /**
+  // /**
+  //  * Draw an image on the canvas at the specified coordinates
+  //  *
+  //  * @param canvas that canvas that it should be drawn on
+  //  * @param image the image to be drawn
+  //  * @param dx x-coordinate
+  //  * @param dy y-coordinate
+  //  */
+  // public static drawImage(
+  //   canvas: HTMLCanvasElement,
+  //   image: HTMLImageElement,
+  //   dx: number,
+  //   dy: number,
+  // ): void {
+  //   const ctx: CanvasRenderingContext2D = CanvasRenderer.getCanvasContext(canvas);
+  //   ctx.drawImage(image, dx, dy);
+  // }
+
+    /**
    * Draw an image on the canvas at the specified coordinates
    *
    * @param canvas that canvas that it should be drawn on
    * @param image the image to be drawn
    * @param dx x-coordinate
    * @param dy y-coordinate
+   * @param dwidth image width
+   * @param dheight image height
    */
   public static drawImage(
     canvas: HTMLCanvasElement,
@@ -64,7 +84,7 @@ export default class CanvasRenderer {
     dheight: number
   ): void {
     const ctx: CanvasRenderingContext2D = CanvasRenderer.getCanvasContext(canvas);
-    ctx.drawImage(image, dx, dy);
+    ctx.drawImage(image, dx, dy, dwidth, dheight);
   }
 
   /**
